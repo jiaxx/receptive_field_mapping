@@ -10,9 +10,9 @@ mouse_IDs = [ '424445','415148', '416356','416861','419112','419116']
 
 for mouse_ID in mouse_IDs:
 
-    basepath = '/Users/xiaoxuanj/work/work_allen/Ephys/mouse'+mouse_ID
+    basepath = '/path/mouse'+mouse_ID
     
-    df = pd.read_csv('/Volumes/local1/work_allen/Ephys/mouse'+mouse_ID+'/matrix/mouse'+mouse_ID+'_cortex_meta.csv', index_col=0)
+    df = pd.read_csv('/path/mouse'+mouse_ID+'/matrix/mouse'+mouse_ID+'_cortex_meta.csv', index_col=0)
     FR = df.FR.values
     df = df[FR>2]
     df = df.reset_index().drop(['index'], axis=1)
@@ -25,7 +25,7 @@ for mouse_ID in mouse_IDs:
     del ccg_grating
 
     # load RF df (from Gabor fit), select units with RF on screen
-    df_rf = pd.read_csv('/Users/xiaoxuanj/work/work_allen/Ephys/processed_data/RF_features/mouse'+mouse_ID+'_rf_features.csv', index_col=0)
+    df_rf = pd.read_csv('/path/RF_features/mouse'+mouse_ID+'_rf_features.csv', index_col=0)
 
     df_tmp=pd.merge(df,df_rf, on=['unit_id', 'probe_id', 'channel_id'], how='inner')
     df_tmp = df_tmp[(df_tmp['rf_center_x1'].values>1) & (df_tmp['rf_center_x1']<7) & (df_tmp['rf_center_y1']>1) & (df_tmp['rf_center_y1']<7)]
